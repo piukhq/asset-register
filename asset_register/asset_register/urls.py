@@ -18,10 +18,9 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    re_path(r'^oidc/', include('mozilla_django_oidc.urls')),
-
-    path('api/', include('dashboard.apiurls')),
-    path('', include('dashboard.urls')),
-    path('', include('django_prometheus.urls')),
+    path("admin/", admin.site.urls),
+    re_path(r"^oidc/", include("mozilla_django_oidc.urls")),
+    path("api/", include("dashboard.apiurls")),
+    path("", include("dashboard.urls")),
+    path("", include("django_prometheus.urls")),
 ]

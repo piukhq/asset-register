@@ -7,12 +7,13 @@ authors = ["Terry Cain <tcain@bink.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^3.0.6"
-psycopg2 = "^2.8.5"
 mozilla-django-oidc = "^1.2.3"
 django-prometheus = "^2.0.0"
 gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
+psycopg2 = "^2.8.5"
+black = "^19.10b0"
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -6,34 +6,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0001_initial'),
+        ("dashboard", "0001_initial"),
     ]
 
     operations = [
+        migrations.AddField(model_name="asset", name="assigned_date", field=models.DateTimeField(null=True),),
+        migrations.AddField(model_name="asset", name="disposal_date", field=models.DateTimeField(null=True),),
         migrations.AddField(
-            model_name='asset',
-            name='assigned_date',
-            field=models.DateTimeField(null=True),
+            model_name="asset", name="disposal_method", field=models.CharField(max_length=32, null=True),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_date',
-            field=models.DateTimeField(null=True),
-        ),
-        migrations.AddField(
-            model_name='asset',
-            name='disposal_method',
-            field=models.CharField(max_length=32, null=True),
-        ),
-        migrations.AddField(
-            model_name='asset',
-            name='disposal_sale_price',
+            model_name="asset",
+            name="disposal_sale_price",
             field=models.DecimalField(decimal_places=4, max_digits=7, null=True),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='type',
-            field=models.CharField(choices=[('MONITOR', 'Monitor'), ('TV', 'TV'), ('LAPTOP', 'Laptop'), ('PHONE', 'Phone'), ('OTHER', 'Other')], default='OTHER', max_length=16),
+            model_name="asset",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ("MONITOR", "Monitor"),
+                    ("TV", "TV"),
+                    ("LAPTOP", "Laptop"),
+                    ("PHONE", "Phone"),
+                    ("OTHER", "Other"),
+                ],
+                default="OTHER",
+                max_length=16,
+            ),
             preserve_default=False,
         ),
     ]
