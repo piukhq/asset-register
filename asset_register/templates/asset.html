@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div id="app">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Assets {{ asset.id }}</h1>
+                <p>{{ asset.description }} - <a href="{% url 'admin:dashboard_asset_change' asset.id %}" class="btn btn-primary" role="button" aria-disabled="true"><i class="fas fa-edit"></i> Edit</a></p>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Serial Number</td>
+                        <td>{{ asset.serial_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td>{{ asset.manufacturer }}</td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td>{{ asset.get_type_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>Metadata</td>
+                        <td>{{ asset.html_metadata }}</td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td>{{ asset.get_state_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>Asset Keeper</td>
+                        <td>{{ asset.asset_keeper }}</td>
+                    </tr>
+                    <tr>
+                        <td>Assigned Date</td>
+                        <td>{{ asset.assigned_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cost</td>
+                        <td>£{{ asset.cost|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>VAT</td>
+                        <td>£{{ asset.vat|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Cost</td>
+                        <td>£{{ asset.total_cost|floatformat:2 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+
+    <script type="application/javascript">
+        const app = new Vue({
+            delimiters: ["<%", "%>"],
+            el: '#app',
+            data: {
+                assets: []
+            },
+            mounted: async function() {
+                let resp = await axios.get('/api/asset')
+                if (resp.status === 200) {
+                    console.log('assigning items')
+                    for (let item of resp.data.items) {
+                        console.log(this.assets)
+                        this.assets.push(item)
+                    }
+                }
+            }
+        })
+    </script>
+{% endblock %}

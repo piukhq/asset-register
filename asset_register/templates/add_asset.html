@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div id="app">
+        <div class="row mt-5">
+            <div class="col-lg-9">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" v-for="(item, index) in errors">
+                    <% item %>
+                    <button type="button" class="close" aria-label="Close" v-on:click.prevent="errors.splice(index, 1)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <h3>Add Asset</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="id">Asset ID<sup style="color: #ff0000">*</sup></label>
+                        <input type="text" class="form-control" id="id" aria-describedby="id"
+                               v-model='asset_id' placeholder="Asset id: e.g. TV01" required="required" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Asset description</label>
+                        <input type="text" class="form-control" id="description" aria-describedby="description"
+                               v-model="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="serial_number">Serial number</label>
+                        <input type="text" class="form-control" id="serial_number" aria-describedby="serial_number"
+                               v-model="serial_number" placeholder="e.g. D58FFACUQN7D">
+                    </div>
+                    <div class="form-group">
+                        <label for="manufacturer">Manufacturer</label>
+                        <input type="text" class="form-control" id="manufacturer" aria-describedby="manufacturer"
+                               v-model="manufacturer" placeholder="e.g. Apple">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Type<sup style="color: #ff0000">*</sup></label>
+                        <select v-model="type" v-on:change="handleTypeChange" class="form-control" id="exampleFormControlSelect1" required="required">
+                            {% for item in types %}
+                                <option value="{{ item.0 }}">{{ item.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-outline-primary mb-3" v-on:click.prevent="addMetadataEmptyItem"><i class="fas fa-plus"></i> Add metadata item</button>
+
+                        <div class="form-row" v-for="(item, index) in metadata">
+                            <div class="form-group col-md-5">
+                                <input type="text" class="form-control" placeholder="Name" v-model="item.name">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <input type="text" class="form-control" placeholder="Value" v-model="item.value">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <button type="submit" class="btn btn-danger" v-on:click.prevent="removeMetadataItem(index)"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="cost">Cost</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">£</div>
+                                </div>
+                                <input type="text" class="form-control" id="cost" placeholder="Cost" v-model="cost">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="vat">VAT</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">£</div>
+                                </div>
+                                <input type="text" class="form-control" id="vat" placeholder="VAT" v-model="vat">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Asset Keeper</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Name" v-model="asset_keeper">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" v-on:click.prevent="handleSubmit"><i class="fas fa-plus"></i> Add Asset</button>
+                </form>
+            </div>
+            <div class="col-lg-3">
+                <h3>Add Asset Help</h3>
+                <p>lalalala</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+            integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+
+    <script type="application/javascript">
+        const app = new Vue({
+            delimiters: ["<%", "%>"],
+            el: '#app',
+            data: {
+                errors: [],
+
+                asset_id: '',
+                description: '',
+                serial_number: '',
+                manufacturer: '',
+                metadata: [
+                ],
+                type: 'OTHER',
+                cost: 0.0,
+                vat: 0.0,
+                asset_keeper: '',
+            },
+            methods: {
+                handleSubmit: async function(event) {
+                    let metadataObj = this.metadata.reduce((obj, item) => (obj[item.name] = item.value, obj), {})
+                    // Metadata json type conversions
+                    if (!!metadataObj.ram) metadataObj.ram = parseInt(metadataObj.ram)
+                    if (!!metadataObj.disk) metadataObj.disk = parseInt(metadataObj.disk)
+
+                    const data = {
+                        id: this.asset_id.toUpperCase(),
+                        description: this.description,
+                        serial_number: this.serial_number,
+                        manufacturer: this.manufacturer,
+                        type: this.type,
+                        cost: this.cost,
+                        vat: this.vat,
+                        asset_keeper: this.asset_keeper,
+                        metadata: metadataObj
+                    }
+
+                    try {
+                        let resp = await axios.post('/api/asset', data)
+                        if (resp.status === 200) {
+                            window.location.href = resp.data.url
+                        } else {
+                            console.error(resp)
+                        }
+                    } catch (e) {
+                        if (e.isAxiosError) {
+                            if (e.response.data && e.response.data.error) {
+                                this.errors.push(e.response.data.error)
+                            } else {
+                                console.error(console.dir(e))
+                            }
+                        } else {
+                            console.error(e)
+                        }
+
+                    }
+
+                },
+                addMetadataEmptyItem: function() {
+                    this.addMetadataItem('','')
+                },
+                addMetadataItem: function(name, value) {
+                    let found = false
+                    for (let item of this.metadata) {
+                        if (item.name === name) {
+                            found = true
+                            break
+                        }
+                    }
+
+                    if (!found) {
+                        this.metadata.push({'name': name, 'value': value})
+                    }
+                },
+                handleTypeChange: function() {
+                    if (this.type === 'LAPTOP') {
+                        this.addMetadataItem('ram', '16')
+                        this.addMetadataItem('disk', '256')
+                        this.addMetadataItem('model', 'MacBook Pro')
+                    } else {
+                        this.removeMetadataItemByName('ram')
+                        this.removeMetadataItemByName('disk')
+                        this.removeMetadataItemByName('model')
+                    }
+                },
+                removeMetadataItem: function (index) {
+                    this.metadata.splice(index, 1)
+                },
+                removeMetadataItemByName: function(name) {
+                    for (let i = 0; i < this.metadata.length; i++) {
+                        if (this.metadata[i].name === name) {
+                            this.removeMetadataItem(i)
+                            break
+                        }
+                    }
+                }
+
+            }
+        })
+    </script>
+{% endblock %}
