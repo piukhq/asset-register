@@ -50,11 +50,12 @@ class ApiAssetView(View):
             return JsonResponse({"error": "invalid JSON data"}, status=400)
 
         asset_id = json_data["id"].strip()
+        allow_overwrite = request.GET.get("allow_overwrite", "false") == "true"
         if asset_id == "":
             return JsonResponse({"error": "Asset ID cannot be empty"}, status=400)
 
         try:
-            Asset.create(json_data)
+            Asset.create(json_data, allow_overwrite=allow_overwrite)
         except Exception as err:
             return JsonResponse({"error": str(err)}, status=400)
 

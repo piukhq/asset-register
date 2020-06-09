@@ -29,16 +29,18 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Details</th>
                         <th scope="col">Owner</th>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Details</th>
                     </tr>
                     </thead>
                     <tbody v-cloak>
                     <tr v-for="asset in searchFilter">
                         <td><a v-bind:href="asset.view_url"><% asset.id %></a></td>
                         <td><% asset.type %></td>
-                        <td><% asset.metadata %></td>
                         <td><% asset.owner %></td>
+                        <td><% asset.serial %></td>
+                        <td><% asset.metadata %></td>
                     </tr>
                     </tbody>
                 </table>
@@ -81,7 +83,11 @@
                             continue
                         }
 
-                        let haystack = [item.id.toLowerCase(), item.type.toLowerCase(), item.metadata.toLowerCase(), item.owner.toLowerCase()].join(" ")
+                        let haystack = [
+                            item.id.toLowerCase(), item.type.toLowerCase(),
+                            item.metadata.toLowerCase(), item.owner.toLowerCase(),
+                            item.serial.toLowerCase()
+                        ].join(" ")
 
                         if (search(needles, haystack)) {
                             result.push(item)

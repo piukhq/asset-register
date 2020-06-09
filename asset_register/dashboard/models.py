@@ -37,10 +37,10 @@ class Asset(models.Model):
         return f"{self.id} ({self.type})"
 
     @classmethod
-    def create(cls, data: Dict[str, Any]) -> None:
+    def create(cls, data: Dict[str, Any], allow_overwrite: bool) -> None:
         # Shouldn't really do this but am lazy
         asset_id = data["id"]
-        if cls.objects.filter(id=asset_id):
+        if cls.objects.filter(id=asset_id) and not allow_overwrite:
             raise Exception(f"Asset with id {asset_id} already exists")
 
         record = cls(**data)
@@ -56,6 +56,7 @@ class Asset(models.Model):
                     "id": obj.id,
                     "type": obj.get_type_display(),
                     "owner": obj.asset_keeper,
+                    "serial": obj.serial_number,
                     "metadata": obj.string_metadata,
                     "view_url": reverse("asset_view", kwargs={"asset_id": obj.id}),
                     "api_url": reverse("api_asset_id", kwargs={"asset_id": obj.id}),
