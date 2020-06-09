@@ -54,6 +54,15 @@
             integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 
     <script type="application/javascript">
+        function search(needles, haystack) {
+            for (let needle of needles) {
+                if (haystack.includes(needle)) {
+                    return true
+                }
+            }
+            return false
+        }
+
         const app = new Vue({
             delimiters: ["<%", "%>"],
             el: '#app',
@@ -64,6 +73,7 @@
             computed: {
                 searchFilter() {
                     let result = []
+                    let needles = this.search.trim().toLowerCase().split(/[ ]+/);
 
                     for (let item of this.assets) {
                         if (this.search.trim() === '') {
@@ -71,11 +81,9 @@
                             continue
                         }
 
-                        let search_trimmed = this.search.trim().toLowerCase()
-                        if (item.id.toLowerCase().includes(search_trimmed) ||
-                            item.type.toLowerCase().includes(search_trimmed) ||
-                            item.metadata.toLowerCase().includes(search_trimmed) ||
-                            item.owner.toLowerCase().includes(search_trimmed)) {
+                        let haystack = [item.id.toLowerCase(), item.type.toLowerCase(), item.metadata.toLowerCase(), item.owner.toLowerCase()].join(" ")
+
+                        if (search(needles, haystack)) {
                             result.push(item)
                         }
                     }
