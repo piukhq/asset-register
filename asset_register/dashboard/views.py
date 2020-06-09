@@ -8,12 +8,11 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Asset
+from .utils import login_required
 
 
+@login_required()
 def index(request: HttpRequest) -> HttpResponse:
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("oidc_authentication_init"))
-
     return render(request, "active_assets.html")
 
 
@@ -23,27 +22,22 @@ def test_delay(request: HttpRequest) -> HttpResponse:
     return JsonResponse({"status": "ok"})
 
 
+@login_required()
 def add_asset_view(request: HttpRequest) -> HttpResponse:
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("oidc_authentication_init"))
-
     ctx = {"types": Asset.ITEM_TYPE}
-
     return render(request, "add_asset.html", ctx)
 
 
+@login_required()
 def asset_view(request: HttpRequest, asset_id: str) -> HttpResponse:
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("oidc_authentication_init"))
-
     obj = get_object_or_404(Asset, id=asset_id)
 
     ctx = {"asset": obj}
-
     return render(request, "asset.html", ctx)
 
 
 # /api/asset  TODO should use DRF
+@method_decorator(login_required(api=True), name="dispatch")
 @method_decorator(csrf_exempt, name="dispatch")
 class ApiAssetView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
