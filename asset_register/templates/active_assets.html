@@ -64,6 +64,13 @@
             }
             return false
         }
+        function tryLowerCase(value) {
+            try {
+                return value.toLowerCase()
+            } catch (e) {
+                return ''
+            }
+        }
 
         const app = new Vue({
             delimiters: ["<%", "%>"],
@@ -84,9 +91,9 @@
                         }
 
                         let haystack = [
-                            item.id.toLowerCase(), item.type.toLowerCase(),
-                            item.metadata.toLowerCase(), item.owner.toLowerCase(),
-                            item.serial.toLowerCase()
+                            tryLowerCase(item.id), tryLowerCase(item.type),
+                            tryLowerCase(item.metadata), tryLowerCase(item.owner),
+                            tryLowerCase(item.serial)
                         ].join(" ")
 
                         if (search(needles, haystack)) {

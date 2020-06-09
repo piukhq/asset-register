@@ -1,6 +1,9 @@
 import os
 import requests
 
+# asset_register_url = 'http://localhost:8000'
+asset_register_url = "https://asset-register.tools.bink.sh"
+
 jamf_auth = (os.getenv("JAMF_USER"), os.getenv("JAMF_PASSWORD"))
 
 list_computers_resp = requests.get(
@@ -29,7 +32,7 @@ for computer in computers:
     }
 
     requests.post(
-        "http://localhost:8000/api/asset?allow_overwrite=true",
+        f"{asset_register_url}/api/asset?allow_overwrite=true",
         json=payload,
         headers={"Authorization": "Token 7bb4810d-6af0-484d-9595-3402c75bfdc3"},
     )
