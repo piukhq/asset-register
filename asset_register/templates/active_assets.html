@@ -17,11 +17,11 @@
 
                 <div id="table-filter">
                     <form>
-  <div class="form-group">
-    <label for="search">Search</label>
-    <input type="text" class="form-control" v-model="search" aria-describedby="search">
-  </div>
-</form>
+                        <div class="form-group">
+                            <label for="search">Search</label>
+                            <input type="text" class="form-control" v-model="search" aria-describedby="search">
+                        </div>
+                    </form>
                 </div>
 
                 <table class="table">
@@ -64,6 +64,7 @@
             }
             return false
         }
+
         function tryLowerCase(value) {
             try {
                 return value.toLowerCase()

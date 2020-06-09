@@ -4,7 +4,8 @@
     <div id="app">
         <div class="row mt-5">
             <div class="col-lg-9">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert" v-for="(item, index) in errors">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                     v-for="(item, index) in errors">
                     <% item %>
                     <button type="button" class="close" aria-label="Close" v-on:click.prevent="errors.splice(index, 1)">
                         <span aria-hidden="true">&times;</span>
@@ -17,7 +18,8 @@
                     <div class="form-group">
                         <label for="id">Asset ID<sup style="color: #ff0000">*</sup></label>
                         <input type="text" class="form-control" id="id" aria-describedby="id"
-                               v-model='asset_id' placeholder="Asset id: e.g. TV01" required="required" style="text-transform:uppercase">
+                               v-model='asset_id' placeholder="Asset id: e.g. TV01" required="required"
+                               style="text-transform:uppercase">
                     </div>
                     <div class="form-group">
                         <label for="description">Asset description</label>
@@ -36,14 +38,17 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Type<sup style="color: #ff0000">*</sup></label>
-                        <select v-model="type" v-on:change="handleTypeChange" class="form-control" id="exampleFormControlSelect1" required="required">
+                        <select v-model="type" v-on:change="handleTypeChange" class="form-control"
+                                id="exampleFormControlSelect1" required="required">
                             {% for item in types %}
                                 <option value="{{ item.0 }}">{{ item.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-sm btn-outline-primary mb-3" v-on:click.prevent="addMetadataEmptyItem"><i class="fas fa-plus"></i> Add metadata item</button>
+                        <button type="submit" class="btn btn-sm btn-outline-primary mb-3"
+                                v-on:click.prevent="addMetadataEmptyItem"><i class="fas fa-plus"></i> Add metadata item
+                        </button>
 
                         <div class="form-row" v-for="(item, index) in metadata">
                             <div class="form-group col-md-5">
@@ -53,11 +58,12 @@
                                 <input type="text" class="form-control" placeholder="Value" v-model="item.value">
                             </div>
                             <div class="form-group col-md-2">
-                                <button type="submit" class="btn btn-danger" v-on:click.prevent="removeMetadataItem(index)"><i class="fas fa-times"></i></button>
+                                <button type="submit" class="btn btn-danger"
+                                        v-on:click.prevent="removeMetadataItem(index)"><i class="fas fa-times"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
-
 
 
                     <div class="form-row">
@@ -86,7 +92,9 @@
                                placeholder="Name" v-model="asset_keeper">
                     </div>
 
-                    <button type="submit" class="btn btn-primary" v-on:click.prevent="handleSubmit"><i class="fas fa-plus"></i> Add Asset</button>
+                    <button type="submit" class="btn btn-primary" v-on:click.prevent="handleSubmit"><i
+                            class="fas fa-plus"></i> Add Asset
+                    </button>
                 </form>
             </div>
             <div class="col-lg-3">
@@ -114,15 +122,14 @@
                 description: '',
                 serial_number: '',
                 manufacturer: '',
-                metadata: [
-                ],
+                metadata: [],
                 type: 'OTHER',
                 cost: 0.0,
                 vat: 0.0,
                 asset_keeper: '',
             },
             methods: {
-                handleSubmit: async function(event) {
+                handleSubmit: async function (event) {
                     let metadataObj = this.metadata.reduce((obj, item) => (obj[item.name] = item.value, obj), {})
                     // Metadata json type conversions
                     if (!!metadataObj.ram) metadataObj.ram = parseInt(metadataObj.ram)
@@ -161,10 +168,10 @@
                     }
 
                 },
-                addMetadataEmptyItem: function() {
-                    this.addMetadataItem('','')
+                addMetadataEmptyItem: function () {
+                    this.addMetadataItem('', '')
                 },
-                addMetadataItem: function(name, value) {
+                addMetadataItem: function (name, value) {
                     let found = false
                     for (let item of this.metadata) {
                         if (item.name === name) {
@@ -177,7 +184,7 @@
                         this.metadata.push({'name': name, 'value': value})
                     }
                 },
-                handleTypeChange: function() {
+                handleTypeChange: function () {
                     if (this.type === 'LAPTOP') {
                         this.addMetadataItem('ram', '16')
                         this.addMetadataItem('disk', '256')
@@ -191,7 +198,7 @@
                 removeMetadataItem: function (index) {
                     this.metadata.splice(index, 1)
                 },
-                removeMetadataItemByName: function(name) {
+                removeMetadataItemByName: function (name) {
                     for (let i = 0; i < this.metadata.length; i++) {
                         if (this.metadata[i].name === name) {
                             this.removeMetadataItem(i)

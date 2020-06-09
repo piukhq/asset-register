@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>Assets {{ asset.id }}</h1>
-                <p>{{ asset.description }} - <a href="{% url 'admin:dashboard_asset_change' asset.id %}" class="btn btn-primary" role="button" aria-disabled="true"><i class="fas fa-edit"></i> Edit</a></p>
+                <p>{{ asset.description }} - <a href="{% url 'admin:dashboard_asset_change' asset.id %}"
+                                                class="btn btn-primary" role="button" aria-disabled="true"><i
+                        class="fas fa-edit"></i> Edit</a></p>
                 <table class="table">
                     <tbody>
                     <tr>
@@ -58,7 +60,8 @@
 {% block script %}
     {{ block.super }}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+            integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 
     <script type="application/javascript">
         const app = new Vue({
@@ -67,7 +70,7 @@
             data: {
                 assets: []
             },
-            mounted: async function() {
+            mounted: async function () {
                 let resp = await axios.get('/api/asset')
                 if (resp.status === 200) {
                     console.log('assigning items')
