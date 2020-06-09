@@ -20,7 +20,7 @@ def login_required(api: bool = False):
                 if request.headers.get("Authorization", "").endswith("7bb4810d-6af0-484d-9595-3402c75bfdc3"):
                     unauthed = False
 
-            if unauthed:
+            if not unauthed:
                 return err_response
             return func(request, *args, **kwargs)
 
