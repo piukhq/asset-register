@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import JSONField
 from typing import Dict, Any, List
 from django.urls import reverse
 from django.utils.safestring import SafeString
+from typing import Optional
 
 
 class Asset(models.Model):
@@ -47,10 +48,17 @@ class Asset(models.Model):
         record.save()
 
     @classmethod
-    def search(cls) -> List[Dict[str, Any]]:
+    def search(cls, filter: Optional[str] = None) -> List[Dict[str, Any]]:
         result = []
 
-        for obj in cls.objects.all():
+        if filter == "computer":
+            call = lambda: cls.objects.filter(type__exact="LAPTOP")
+        elif filter == "misc":
+            call = lambda: cls.objects.exclude(type__exact="LAPTOP")
+        else:
+            call = cls.objects.all
+
+        for obj in call():
             result.append(
                 {
                     "id": obj.id,

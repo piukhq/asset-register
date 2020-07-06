@@ -13,7 +13,20 @@ from .utils import login_required
 
 @login_required()
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, "active_assets.html")
+    ctx = {"nav": "computer"}
+    return render(request, "active_computer_assets.html", ctx)
+
+
+@login_required()
+def misc_asset_view(request: HttpRequest) -> HttpResponse:
+    ctx = {"nav": "misc"}
+    return render(request, "active_misc_assets.html", ctx)
+
+
+@login_required()
+def disposed_asset_view(request: HttpRequest) -> HttpResponse:
+    ctx = {"nav": "disposed"}
+    return render(request, "disposed_assets.html", ctx)
 
 
 def test_delay(request: HttpRequest) -> HttpResponse:
@@ -41,7 +54,9 @@ def asset_view(request: HttpRequest, asset_id: str) -> HttpResponse:
 @method_decorator(csrf_exempt, name="dispatch")
 class ApiAssetView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
-        return JsonResponse({"items": Asset.search()})
+        filter_arg = request.GET.get("filter")
+
+        return JsonResponse({"items": Asset.search(filter_arg)})
 
     def post(self, request: HttpRequest) -> HttpResponse:
         try:

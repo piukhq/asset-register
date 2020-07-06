@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div id="app">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <div class="float-left">
+                        <h1>Active Computer Assets</h1>
+                    </div>
+                    <div class="float-right">
+                        <a href="{% url 'add_asset' %}" class="btn btn-primary mt-2" role="button" aria-disabled="true"><i
+                                class="fas fa-plus"></i> Add Asset</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="table-filter">
+                    <form>
+                        <div class="form-group">
+                            <label for="search">Search</label>
+                            <input type="text" class="form-control" v-model="search" aria-describedby="search">
+                        </div>
+                    </form>
+                </div>
+
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody v-cloak>
+                    <tr v-for="asset in searchFilter">
+                        <td><a v-bind:href="asset.view_url"><% asset.id %></a></td>
+                        <td><% asset.type %></td>
+                        <td><% asset.owner %></td>
+                        <td><% asset.serial %></td>
+                        <td><% asset.metadata %></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+            integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+
+    <script type="application/javascript">
+        function search(needles, haystack) {
+            for (let needle of needles) {
+                if (haystack.includes(needle)) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        function tryLowerCase(value) {
+            try {
+                return value.toLowerCase()
+            } catch (e) {
+                return ''
+            }
+        }
+
+        const app = new Vue({
+            delimiters: ["<%", "%>"],
+            el: '#app',
+            data: {
+                assets: [],
+                search: ''
+            },
+            computed: {
+                searchFilter() {
+                    let result = []
+                    let needles = this.search.trim().toLowerCase().split(/[ ]+/);
+
+                    for (let item of this.assets) {
+                        if (this.search.trim() === '') {
+                            result.push(item)
+                            continue
+                        }
+
+                        let haystack = [
+                            tryLowerCase(item.id), tryLowerCase(item.type),
+                            tryLowerCase(item.metadata), tryLowerCase(item.owner),
+                            tryLowerCase(item.serial)
+                        ].join(" ")
+
+                        if (search(needles, haystack)) {
+                            result.push(item)
+                        }
+                    }
+
+                    // Sort
+                    result.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+                    return result
+                }
+            },
+            mounted: async function () {
+                let resp = await axios.get('/api/asset?filter=computer')
+                if (resp.status === 200) {
+                    for (let item of resp.data.items) {
+                        this.assets.push(item)
+                    }
+                }
+            }
+        })
+    </script>
+{% endblock %}

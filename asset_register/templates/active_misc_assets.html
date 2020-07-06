@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="page-header">
                     <div class="float-left">
-                        <h1>Active Assets</h1>
+                        <h1>Active Misc Assets</h1>
                     </div>
                     <div class="float-right">
                         <a href="{% url 'add_asset' %}" class="btn btn-primary mt-2" role="button" aria-disabled="true"><i
@@ -109,7 +109,7 @@
                 }
             },
             mounted: async function () {
-                let resp = await axios.get('/api/asset')
+                let resp = await axios.get('/api/asset?filter=misc')
                 if (resp.status === 200) {
                     for (let item of resp.data.items) {
                         this.assets.push(item)

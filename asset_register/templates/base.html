@@ -33,12 +33,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'index' %}">Active Assets <span
+                <li class="nav-item {% if nav == "computer" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'index' %}">Active Computer Assets <span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disposed Assets</a>
+                <li class="nav-item {% if nav == "misc" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'misc_assets' %}">Active Other Assets</a>
+                </li>
+                <li class="nav-item {% if nav == "disposed" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'disposed_assets' %}">Disposed Assets</a>
                 </li>
                 <!--<li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
