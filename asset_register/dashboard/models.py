@@ -31,7 +31,7 @@ class Asset(models.Model):
     warranty_date = models.DateTimeField(null=True)
 
     disposal_date = models.DateTimeField(null=True, blank=True)
-    disposal_method = models.CharField(max_length=32, null=True, blank=True)
+    disposal_method = models.CharField(max_length=64, null=True, blank=True)
     disposal_sold_to = models.CharField(max_length=32, null=True, blank=True)
     disposal_sale_price = models.DecimalField(null=True, max_digits=7, decimal_places=4, blank=True)
     disposal_finance_informed = models.BooleanField(default=False)
@@ -83,9 +83,8 @@ class Asset(models.Model):
 
     @property
     def string_metadata(self) -> str:
-        result = ""
+        result = self.manufacturer or "UNKNOWN"
         if self.type == "LAPTOP":
-            result += self.manufacturer or "UNKNOWN"
             if model := self.metadata.get("model"):
                 result += f" {model}"
             if ram := self.metadata.get("ram"):
@@ -98,7 +97,8 @@ class Asset(models.Model):
     @property
     def html_metadata(self) -> SafeString:
         data = ""
-        for key, value in self.metadata.items():
+        metadata = self.metadata or {}
+        for key, value in metadata.items():
             data += f"{key}: {value}\n"
 
         result = f"<pre>{data.strip()}</pre>"
