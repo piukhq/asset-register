@@ -60,7 +60,7 @@ class Asset(models.Model):
         if filter == "computer":
             call = lambda: cls.objects.filter(type__exact="LAPTOP", state__exact="ACTIVE")
         elif filter == "misc":
-            call = lambda: cls.objects.exclude(type__exact="LAPTOP", state__exact="DISPOSED")
+            call = lambda: cls.objects.exclude(type__exact="LAPTOP").exclude(state__exact="DISPOSED")
         elif filter == "disposed":
             call = lambda: cls.objects.filter(state__exact="DISPOSED")
         else:

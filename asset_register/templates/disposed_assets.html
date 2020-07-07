@@ -109,7 +109,7 @@
                 }
             },
             mounted: async function () {
-                let resp = await axios.get('/api/asset?filter=misc')
+                let resp = await axios.get('/api/asset?filter=disposed')
                 if (resp.status === 200) {
                     for (let item of resp.data.items) {
                         this.assets.push(item)
