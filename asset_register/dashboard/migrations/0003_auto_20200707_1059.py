@@ -6,38 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0002_auto_20200601_0923'),
+        ("dashboard", "0002_auto_20200601_0923"),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='asset',
-            name='purchase_date',
-            field=models.DateTimeField(null=True),
-        ),
-        migrations.AddField(
-            model_name='asset',
-            name='warrenty_date',
-            field=models.DateTimeField(null=True),
+        migrations.AddField(model_name="asset", name="purchase_date", field=models.DateTimeField(null=True),),
+        migrations.AddField(model_name="asset", name="warrenty_date", field=models.DateTimeField(null=True),),
+        migrations.AlterField(
+            model_name="asset", name="disposal_date", field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='disposal_date',
-            field=models.DateTimeField(blank=True, null=True),
+            model_name="asset", name="disposal_method", field=models.CharField(blank=True, max_length=32, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='disposal_method',
-            field=models.CharField(blank=True, max_length=32, null=True),
-        ),
-        migrations.AlterField(
-            model_name='asset',
-            name='disposal_sale_price',
+            model_name="asset",
+            name="disposal_sale_price",
             field=models.DecimalField(blank=True, decimal_places=4, max_digits=7, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='state',
-            field=models.TextField(choices=[('ACTIVE', 'Active'), ('DISPOSED', 'Disposed')], default='ACTIVE', max_length=16),
+            model_name="asset",
+            name="state",
+            field=models.TextField(
+                choices=[("ACTIVE", "Active"), ("DISPOSED", "Disposed")], default="ACTIVE", max_length=16
+            ),
         ),
     ]

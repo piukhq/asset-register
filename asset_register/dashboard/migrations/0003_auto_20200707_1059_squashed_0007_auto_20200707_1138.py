@@ -5,71 +5,55 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('dashboard', '0003_auto_20200707_1059'), ('dashboard', '0004_auto_20200707_1110'), ('dashboard', '0005_auto_20200707_1126'), ('dashboard', '0006_auto_20200707_1127'), ('dashboard', '0007_auto_20200707_1138')]
+    replaces = [
+        ("dashboard", "0003_auto_20200707_1059"),
+        ("dashboard", "0004_auto_20200707_1110"),
+        ("dashboard", "0005_auto_20200707_1126"),
+        ("dashboard", "0006_auto_20200707_1127"),
+        ("dashboard", "0007_auto_20200707_1138"),
+    ]
 
     dependencies = [
-        ('dashboard', '0002_auto_20200601_0923'),
+        ("dashboard", "0002_auto_20200601_0923"),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='asset',
-            name='purchase_date',
-            field=models.DateTimeField(null=True),
+        migrations.AddField(model_name="asset", name="purchase_date", field=models.DateTimeField(null=True),),
+        migrations.AlterField(
+            model_name="asset", name="disposal_date", field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='disposal_date',
-            field=models.DateTimeField(blank=True, null=True),
+            model_name="asset", name="disposal_method", field=models.CharField(blank=True, max_length=32, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='disposal_method',
-            field=models.CharField(blank=True, max_length=32, null=True),
-        ),
-        migrations.AlterField(
-            model_name='asset',
-            name='disposal_sale_price',
+            model_name="asset",
+            name="disposal_sale_price",
             field=models.DecimalField(blank=True, decimal_places=4, max_digits=7, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='state',
-            field=models.TextField(choices=[('ACTIVE', 'Active'), ('DISPOSED', 'Disposed')], default='ACTIVE', max_length=16),
+            model_name="asset",
+            name="state",
+            field=models.TextField(
+                choices=[("ACTIVE", "Active"), ("DISPOSED", "Disposed")], default="ACTIVE", max_length=16
+            ),
         ),
-        migrations.AddField(
-            model_name='asset',
-            name='warranty_date',
-            field=models.DateTimeField(null=True),
+        migrations.AddField(model_name="asset", name="warranty_date", field=models.DateTimeField(null=True),),
+        migrations.AlterField(
+            model_name="asset", name="cost", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='cost',
-            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+            model_name="asset", name="vat", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
         ),
         migrations.AlterField(
-            model_name='asset',
-            name='vat',
-            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
-        ),
-        migrations.AlterField(
-            model_name='asset',
-            name='asset_keeper',
-            field=models.CharField(max_length=128, null=True),
+            model_name="asset", name="asset_keeper", field=models.CharField(max_length=128, null=True),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_finance_informed',
-            field=models.BooleanField(default=False),
+            model_name="asset", name="disposal_finance_informed", field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_finance_informed_date',
-            field=models.DateTimeField(null=True),
+            model_name="asset", name="disposal_finance_informed_date", field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_sold_to',
-            field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset", name="disposal_sold_to", field=models.CharField(blank=True, max_length=32, null=True),
         ),
     ]

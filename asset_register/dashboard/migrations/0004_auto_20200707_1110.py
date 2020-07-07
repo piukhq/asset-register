@@ -6,13 +6,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0003_auto_20200707_1059'),
+        ("dashboard", "0003_auto_20200707_1059"),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='asset',
-            old_name='warrenty_date',
-            new_name='warranty_date',
-        ),
+        migrations.RenameField(model_name="asset", old_name="warrenty_date", new_name="warranty_date",),
     ]

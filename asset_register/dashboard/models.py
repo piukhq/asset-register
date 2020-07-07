@@ -85,7 +85,7 @@ class Asset(models.Model):
     def string_metadata(self) -> str:
         result = ""
         if self.type == "LAPTOP":
-            result += self.manufacturer or 'UNKNOWN'
+            result += self.manufacturer or "UNKNOWN"
             if model := self.metadata.get("model"):
                 result += f" {model}"
             if ram := self.metadata.get("ram"):

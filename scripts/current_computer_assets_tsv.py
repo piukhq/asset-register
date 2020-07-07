@@ -1,55 +1,65 @@
 import datetime
 import requests
 
-asset_register_url = 'http://localhost:8000'
+asset_register_url = "http://localhost:8000"
 # asset_register_url = "https://asset-register.tools.bink.sh"
 
 
 def parse_date(value: str) -> str:
     if value:
-        date = datetime.datetime.strptime(value, '%d-%b-%y')
+        date = datetime.datetime.strptime(value, "%d-%b-%y")
         value = date.isoformat()
 
     return value
 
 
-data = open('data/current_computer_asset.tsv', 'r').read().splitlines()
-columns = ('id', 'description', 'hdd', 'ram', 'serial_number', 'manufacturer', 'cost', 'vat', 'total_cost', 'asset_keeper', 'purchase_date', 'warranty_date')
+data = open("data/current_computer_asset.tsv", "r").read().splitlines()
+columns = (
+    "id",
+    "description",
+    "hdd",
+    "ram",
+    "serial_number",
+    "manufacturer",
+    "cost",
+    "vat",
+    "total_cost",
+    "asset_keeper",
+    "purchase_date",
+    "warranty_date",
+)
 
 rows = []
 for item in data:
-    parts = [part.strip() for part in item.split('\t')]
+    parts = [part.strip() for part in item.split("\t")]
     if len(parts) < len(columns):
-        parts.extend([''] * (len(columns) - len(parts)))
+        parts.extend([""] * (len(columns) - len(parts)))
     row = dict(zip(columns, parts))
-    row['purchase_date'] = parse_date(row['purchase_date'])
-    row['warranty_date'] = parse_date(row['warranty_date'])
+    row["purchase_date"] = parse_date(row["purchase_date"])
+    row["warranty_date"] = parse_date(row["warranty_date"])
 
     for col in columns:
         if not row[col]:
             row[col] = None
 
-    if row['hdd']:
-        if 'TB' in row['hdd']:
-            row['hdd'] = int(row['hdd'].replace('TB', '')) * 1024
+    if row["hdd"]:
+        if "TB" in row["hdd"]:
+            row["hdd"] = int(row["hdd"].replace("TB", "")) * 1024
         else:
-            row['hdd'] = int(row['hdd'].replace('GB', ''))
-    if row['ram']:
-        row['ram'] = int(row['ram'].replace('GB', ''))
+            row["hdd"] = int(row["hdd"].replace("GB", ""))
+    if row["ram"]:
+        row["ram"] = int(row["ram"].replace("GB", ""))
 
-    if row['cost']:
-        row['cost'] = float(row['cost'].replace(',', '').strip('£'))
-    if row['vat']:
-        row['vat'] = float(row['vat'].replace(',', '').strip('£'))
+    if row["cost"]:
+        row["cost"] = float(row["cost"].replace(",", "").strip("£"))
+    if row["vat"]:
+        row["vat"] = float(row["vat"].replace(",", "").strip("£"))
 
-    row['type'] = 'LAPTOP'
+    row["type"] = "LAPTOP"
 
-    row['metadata'] = {
-        'ram': row['ram'],
-        'disk': row['hdd']
-    }
+    row["metadata"] = {"ram": row["ram"], "disk": row["hdd"]}
 
-    for key in ('total_cost', 'ram', 'hdd'):
+    for key in ("total_cost", "ram", "hdd"):
         del row[key]
 
     # if row['id'] != 'MAC127':

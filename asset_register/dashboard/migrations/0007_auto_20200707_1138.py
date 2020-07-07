@@ -6,23 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0006_auto_20200707_1127'),
+        ("dashboard", "0006_auto_20200707_1127"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='asset',
-            name='disposal_finance_informed',
-            field=models.BooleanField(default=False),
+            model_name="asset", name="disposal_finance_informed", field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_finance_informed_date',
-            field=models.DateTimeField(null=True),
+            model_name="asset", name="disposal_finance_informed_date", field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name='asset',
-            name='disposal_sold_to',
-            field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset", name="disposal_sold_to", field=models.CharField(blank=True, max_length=32, null=True),
         ),
     ]
