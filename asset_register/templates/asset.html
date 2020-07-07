@@ -50,6 +50,14 @@
                         <td>Total Cost</td>
                         <td>£{{ asset.total_cost|floatformat:2 }}</td>
                     </tr>
+                    <tr>
+                        <td>Purchase Date</td>
+                        <td>{{ asset.purchase_date|default_if_none:"" }}</td>
+                    </tr>
+                    <tr>
+                        <td>Warranty Date</td>
+                        <td>{{ asset.warranty_date|default_if_none:"" }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

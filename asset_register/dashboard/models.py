@@ -22,14 +22,20 @@ class Asset(models.Model):
     state = models.TextField(choices=STATES, null=False, default="ACTIVE", max_length=16)
 
     # Misc
-    cost = models.DecimalField(null=True, max_digits=7, decimal_places=4)
-    vat = models.DecimalField(null=True, max_digits=7, decimal_places=4)
-    asset_keeper = models.CharField(max_length=32, null=True)
+    cost = models.DecimalField(null=True, max_digits=12, decimal_places=4)
+    vat = models.DecimalField(null=True, max_digits=12, decimal_places=4)
+    asset_keeper = models.CharField(max_length=128, null=True)
     assigned_date = models.DateTimeField(null=True)
+
+    purchase_date = models.DateTimeField(null=True)
+    warranty_date = models.DateTimeField(null=True)
 
     disposal_date = models.DateTimeField(null=True, blank=True)
     disposal_method = models.CharField(max_length=32, null=True, blank=True)
+    disposal_sold_to = models.CharField(max_length=32, null=True, blank=True)
     disposal_sale_price = models.DecimalField(null=True, max_digits=7, decimal_places=4, blank=True)
+    disposal_finance_informed = models.BooleanField(default=False)
+    disposal_finance_informed_date = models.DateTimeField(null=True)
 
     def __repr__(self) -> str:
         return f"<Asset {str(self)}>"
@@ -52,9 +58,11 @@ class Asset(models.Model):
         result = []
 
         if filter == "computer":
-            call = lambda: cls.objects.filter(type__exact="LAPTOP")
+            call = lambda: cls.objects.filter(type__exact="LAPTOP", state__exact="ACTIVE")
         elif filter == "misc":
-            call = lambda: cls.objects.exclude(type__exact="LAPTOP")
+            call = lambda: cls.objects.exclude(type__exact="LAPTOP", state__exact="DISPOSED")
+        elif filter == "disposed":
+            call = lambda: cls.objects.filter(state__exact="DISPOSED")
         else:
             call = cls.objects.all
 
@@ -77,7 +85,7 @@ class Asset(models.Model):
     def string_metadata(self) -> str:
         result = ""
         if self.type == "LAPTOP":
-            result += self.manufacturer
+            result += self.manufacturer or 'UNKNOWN'
             if model := self.metadata.get("model"):
                 result += f" {model}"
             if ram := self.metadata.get("ram"):
