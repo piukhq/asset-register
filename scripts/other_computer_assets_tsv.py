@@ -42,16 +42,16 @@ for item in data:
         if not row[col]:
             row[col] = None
 
-    if 'MON' in row['id']:
-        row['type'] = 'MONITOR'
-    elif 'PHON' in row['id']:
-        row['type'] = 'PHONE'
-    elif 'POL' in row['id']:
-        row['type'] = 'PHONE'
-    elif 'TV' in row['id']:
-        row['type'] = 'TV'
+    if "MON" in row["id"]:
+        row["type"] = "MONITOR"
+    elif "PHON" in row["id"]:
+        row["type"] = "PHONE"
+    elif "POL" in row["id"]:
+        row["type"] = "PHONE"
+    elif "TV" in row["id"]:
+        row["type"] = "TV"
     else:
-        row['type'] = 'OTHER'
+        row["type"] = "OTHER"
 
     for key in ("total_cost", "ram", "hdd"):
         del row[key]

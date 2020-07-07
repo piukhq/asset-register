@@ -26,7 +26,7 @@ columns = (
     "disposal_method",
     "disposal_sold_to",
     "disposal_sale_price",
-    "disposal_finance_informed_date"
+    "disposal_finance_informed_date",
 )
 
 rows = []

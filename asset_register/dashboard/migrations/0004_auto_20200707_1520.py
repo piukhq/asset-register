@@ -6,13 +6,11 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0003_auto_20200707_1059_squashed_0007_auto_20200707_1138'),
+        ("dashboard", "0003_auto_20200707_1059_squashed_0007_auto_20200707_1138"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='asset',
-            name='disposal_method',
-            field=models.CharField(blank=True, max_length=64, null=True),
+            model_name="asset", name="disposal_method", field=models.CharField(blank=True, max_length=64, null=True),
         ),
     ]
