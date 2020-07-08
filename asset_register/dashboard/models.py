@@ -74,6 +74,8 @@ class Asset(models.Model):
                     "owner": obj.asset_keeper,
                     "serial": obj.serial_number,
                     "metadata": obj.string_metadata,
+                    "description": obj.description,
+                    "disposal_method": obj.disposal_method,
                     "view_url": reverse("asset_view", kwargs={"asset_id": obj.id}),
                     "api_url": reverse("api_asset_id", kwargs={"asset_id": obj.id}),
                 }

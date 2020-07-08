@@ -30,7 +30,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Type</th>
                         <th scope="col">Owner</th>
-                        <th scope="col">Serial</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Details</th>
                     </tr>
                     </thead>
@@ -39,7 +39,7 @@
                         <td><a v-bind:href="asset.view_url"><% asset.id %></a></td>
                         <td><% asset.type %></td>
                         <td><% asset.owner %></td>
-                        <td><% asset.serial %></td>
+                        <td><% asset.description %></td>
                         <td><% asset.metadata %></td>
                     </tr>
                     </tbody>
