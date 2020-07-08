@@ -14,9 +14,9 @@ class Asset(models.Model):
     id = models.CharField(max_length=10, primary_key=True)
 
     description = models.TextField(null=True)
-    serial_number = models.CharField(max_length=64, null=True)
-    manufacturer = models.CharField(max_length=32, null=True)
-    metadata = JSONField(null=True)
+    serial_number = models.CharField(max_length=64, null=True, blank=True)
+    manufacturer = models.CharField(max_length=32, null=True, blank=True)
+    metadata = JSONField(null=True, blank=True)
     type = models.CharField(choices=ITEM_TYPE, max_length=16, null=False)
 
     state = models.TextField(choices=STATES, null=False, default="ACTIVE", max_length=16)
@@ -24,18 +24,18 @@ class Asset(models.Model):
     # Misc
     cost = models.DecimalField(null=True, max_digits=12, decimal_places=4)
     vat = models.DecimalField(null=True, max_digits=12, decimal_places=4)
-    asset_keeper = models.CharField(max_length=128, null=True)
-    assigned_date = models.DateTimeField(null=True)
+    asset_keeper = models.CharField(max_length=128, null=True, blank=True)
+    assigned_date = models.DateTimeField(null=True, blank=True)
 
-    purchase_date = models.DateTimeField(null=True)
-    warranty_date = models.DateTimeField(null=True)
+    purchase_date = models.DateTimeField(null=True, blank=True)
+    warranty_date = models.DateTimeField(null=True, blank=True)
 
     disposal_date = models.DateTimeField(null=True, blank=True)
     disposal_method = models.CharField(max_length=64, null=True, blank=True)
     disposal_sold_to = models.CharField(max_length=32, null=True, blank=True)
     disposal_sale_price = models.DecimalField(null=True, max_digits=7, decimal_places=4, blank=True)
     disposal_finance_informed = models.BooleanField(default=False)
-    disposal_finance_informed_date = models.DateTimeField(null=True)
+    disposal_finance_informed_date = models.DateTimeField(null=True, blank=True)
 
     def __repr__(self) -> str:
         return f"<Asset {str(self)}>"
