@@ -43,6 +43,9 @@
                 <li class="nav-item {% if nav == "disposed" %}active{% endif %}">
                     <a class="nav-link" href="{% url 'disposed_assets' %}">Disposed Assets</a>
                 </li>
+                <li class="nav-item {% if nav == "azure" %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'azure_assets' %}">Azure Assets</a>
+                </li>
                 <!--<li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>

@@ -1,4 +1,18 @@
 [[package]]
+category = "main"
+description = "Note: This library is already replaced by MSAL Python, available here: https://pypi.org/project/msal/ .ADAL Python remains available here as a legacy. The ADAL for Python library makes it easy for python application to authenticate to Azure Active Directory (AAD) in order to access AAD protected web resources."
+name = "adal"
+optional = false
+python-versions = "*"
+version = "1.2.4"
+
+[package.dependencies]
+PyJWT = ">=1.0.0"
+cryptography = ">=1.1.0"
+python-dateutil = ">=2.1.0"
+requests = ">=2.0.0"
+
+[[package]]
 category = "dev"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 name = "appdirs"
@@ -30,6 +44,92 @@ azure-pipelines = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six
 dev = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface", "sphinx", "pre-commit"]
 docs = ["sphinx", "zope.interface"]
 tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface"]
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Client Library for Python (Common)"
+name = "azure-common"
+optional = false
+python-versions = "*"
+version = "1.1.25"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Compute Management Client Library for Python"
+name = "azure-mgmt-compute"
+optional = false
+python-versions = "*"
+version = "13.0.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Front Door Service Client Library for Python"
+name = "azure-mgmt-frontdoor"
+optional = false
+python-versions = "*"
+version = "0.3.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Key Vault Management Client Library for Python"
+name = "azure-mgmt-keyvault"
+optional = false
+python-versions = "*"
+version = "2.2.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Network Management Client Library for Python"
+name = "azure-mgmt-network"
+optional = false
+python-versions = "*"
+version = "11.0.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure RDBMS Management Client Library for Python"
+name = "azure-mgmt-rdbms"
+optional = false
+python-versions = "*"
+version = "2.2.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
+
+[[package]]
+category = "main"
+description = "Microsoft Azure Redis Cache Management Client Library for Python"
+name = "azure-mgmt-redis"
+optional = false
+python-versions = "*"
+version = "6.0.0"
+
+[package.dependencies]
+azure-common = ">=1.1,<2.0"
+msrest = ">=0.5.0"
+msrestazure = ">=0.4.32,<2.0.0"
 
 [[package]]
 category = "dev"
@@ -160,6 +260,17 @@ version = "2.9"
 
 [[package]]
 category = "main"
+description = "An ISO 8601 date/time/duration parser and formatter"
+name = "isodate"
+optional = false
+python-versions = "*"
+version = "0.6.0"
+
+[package.dependencies]
+six = "*"
+
+[[package]]
+category = "main"
 description = "JOSE protocol implementation in Python"
 name = "josepy"
 optional = false
@@ -192,6 +303,49 @@ cryptography = "*"
 josepy = "*"
 requests = "*"
 six = "*"
+
+[[package]]
+category = "main"
+description = "AutoRest swagger generator Python client runtime."
+name = "msrest"
+optional = false
+python-versions = "*"
+version = "0.6.17"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+isodate = ">=0.6.0"
+requests = ">=2.16,<3.0"
+requests-oauthlib = ">=0.5.0"
+
+[package.extras]
+async = ["aiohttp (>=3.0)", "aiodns"]
+
+[[package]]
+category = "main"
+description = "AutoRest swagger generator Python client runtime. Azure-specific module."
+name = "msrestazure"
+optional = false
+python-versions = "*"
+version = "0.6.4"
+
+[package.dependencies]
+adal = ">=0.6.0,<2.0.0"
+msrest = ">=0.6.0,<2.0.0"
+six = "*"
+
+[[package]]
+category = "main"
+description = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+name = "oauthlib"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "3.1.0"
+
+[package.extras]
+rsa = ["cryptography"]
+signals = ["blinker"]
+signedtoken = ["cryptography", "pyjwt (>=1.0.0)"]
 
 [[package]]
 category = "dev"
@@ -230,6 +384,19 @@ version = "2.20"
 
 [[package]]
 category = "main"
+description = "JSON Web Token implementation in Python"
+name = "pyjwt"
+optional = false
+python-versions = "*"
+version = "1.7.1"
+
+[package.extras]
+crypto = ["cryptography (>=1.4)"]
+flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
+test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
+
+[[package]]
+category = "main"
 description = "Python wrapper module around the OpenSSL library"
 name = "pyopenssl"
 optional = false
@@ -243,6 +410,17 @@ six = ">=1.5.2"
 [package.extras]
 docs = ["sphinx", "sphinx-rtd-theme"]
 test = ["flaky", "pretend", "pytest (>=3.0.1)"]
+
+[[package]]
+category = "main"
+description = "Extensions to the standard Python datetime module"
+name = "python-dateutil"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+version = "2.8.1"
+
+[package.dependencies]
+six = ">=1.5"
 
 [[package]]
 category = "main"
@@ -277,6 +455,21 @@ urllib3 = ">=1.21.1,<1.25.0 || >1.25.0,<1.25.1 || >1.25.1,<1.26"
 [package.extras]
 security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)"]
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
+
+[[package]]
+category = "main"
+description = "OAuthlib authentication support for Requests."
+name = "requests-oauthlib"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.3.0"
+
+[package.dependencies]
+oauthlib = ">=3.0.0"
+requests = ">=2.0.0"
+
+[package.extras]
+rsa = ["oauthlib (>=3.0.0)"]
 
 [[package]]
 category = "main"
@@ -324,10 +517,14 @@ secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [metadata]
-content-hash = "660732146da07484b82c9e9687a04c70ab1833ed045d088fa887c063e517a395"
+content-hash = "75c899fe1cac63a5406c7509649b0ce8e60848d8b9b29e76e8d32a032a1fa3a4"
 python-versions = "^3.8"
 
 [metadata.files]
+adal = [
+    {file = "adal-1.2.4-py2.py3-none-any.whl", hash = "sha256:b332316f54d947f39acd9628e7d61d90f6e54d413d6f97025a51482c96bac6bc"},
+    {file = "adal-1.2.4.tar.gz", hash = "sha256:7a15d22b1ee7ce1be92441199958748982feba6b7dec35fbf60f9b607bad1bc0"},
+]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
@@ -339,6 +536,34 @@ asgiref = [
 attrs = [
     {file = "attrs-19.3.0-py2.py3-none-any.whl", hash = "sha256:08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c"},
     {file = "attrs-19.3.0.tar.gz", hash = "sha256:f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"},
+]
+azure-common = [
+    {file = "azure-common-1.1.25.zip", hash = "sha256:ce0f1013e6d0e9faebaf3188cc069f4892fc60a6ec552e3f817c1a2f92835054"},
+    {file = "azure_common-1.1.25-py2.py3-none-any.whl", hash = "sha256:fd02e4256dc9cdd2d4422bc795bdca2ef302f7a86148b154fbf4ea1f09da400a"},
+]
+azure-mgmt-compute = [
+    {file = "azure-mgmt-compute-13.0.0.zip", hash = "sha256:7f331bafcbedf25d65aa42038f7553747dab18d7f10a5af3297192d31c45339e"},
+    {file = "azure_mgmt_compute-13.0.0-py2.py3-none-any.whl", hash = "sha256:0848fe37b4b6e49bed07d3969789072da7c259e8a8d21458251c3912f695e7c2"},
+]
+azure-mgmt-frontdoor = [
+    {file = "azure-mgmt-frontdoor-0.3.0.zip", hash = "sha256:54c104a0ac888026362703447dc206d2835fd57f06fc621ce1ea6ccaa4d4ee61"},
+    {file = "azure_mgmt_frontdoor-0.3.0-py2.py3-none-any.whl", hash = "sha256:0c5a6093fe7ffeae5c1acca3c3aef1e85067ddbb66de8afb19a9bf3a909a045e"},
+]
+azure-mgmt-keyvault = [
+    {file = "azure-mgmt-keyvault-2.2.0.zip", hash = "sha256:1883e12eeb5819064dc52bf3a3ade05c791f4b66e4aeec948bda28df6ce2bce4"},
+    {file = "azure_mgmt_keyvault-2.2.0-py2.py3-none-any.whl", hash = "sha256:8b490af44d389b918b4feca41a27eab0e77d724f64db69e3e6e00c8b984e07f2"},
+]
+azure-mgmt-network = [
+    {file = "azure-mgmt-network-11.0.0.zip", hash = "sha256:7fdfc631c660cb173eee88abbb7b8be7742f91b522be6017867f217409cd69bc"},
+    {file = "azure_mgmt_network-11.0.0-py2.py3-none-any.whl", hash = "sha256:0a4bda7341e33b2cfa567928f4374fe4e0c5710a328174f780813359ef15786b"},
+]
+azure-mgmt-rdbms = [
+    {file = "azure-mgmt-rdbms-2.2.0.zip", hash = "sha256:f93344897a9bfa6ebc57dd0c10ad79602ff7965c322c65115e3f4b8584bbe1c7"},
+    {file = "azure_mgmt_rdbms-2.2.0-py2.py3-none-any.whl", hash = "sha256:d05afdc929dfb586caf60958d86428d9445e43661a7abc0cc95f47dc31828fe9"},
+]
+azure-mgmt-redis = [
+    {file = "azure-mgmt-redis-6.0.0.zip", hash = "sha256:db999e104edeee3a13a8ceb1881e15196fe03a02635e0e20855eb52c1e2ecca1"},
+    {file = "azure_mgmt_redis-6.0.0-py2.py3-none-any.whl", hash = "sha256:756fd080868fd057fdaa4b7663985d8ffebd941ad06a4d9786fe4470e65a2114"},
 ]
 black = [
     {file = "black-19.10b0-py36-none-any.whl", hash = "sha256:1b30e59be925fafc1ee4565e5e08abef6b03fe455102883820fe5ee2e4734e0b"},
@@ -423,6 +648,10 @@ idna = [
     {file = "idna-2.9-py2.py3-none-any.whl", hash = "sha256:a068a21ceac8a4d63dbfd964670474107f541babbd2250d61922f029858365fa"},
     {file = "idna-2.9.tar.gz", hash = "sha256:7588d1c14ae4c77d74036e8c22ff447b26d0fde8f007354fd48a7814db15b7cb"},
 ]
+isodate = [
+    {file = "isodate-0.6.0-py2.py3-none-any.whl", hash = "sha256:aa4d33c06640f5352aca96e4b81afd8ab3b47337cc12089822d6f322ac772c81"},
+    {file = "isodate-0.6.0.tar.gz", hash = "sha256:2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8"},
+]
 josepy = [
     {file = "josepy-1.3.0-py2.py3-none-any.whl", hash = "sha256:e54882c64be12a2a76533f73d33cba9e331950fda9e2731e843490b774e7a01c"},
     {file = "josepy-1.3.0.tar.gz", hash = "sha256:c341ffa403399b18e9eae9012f804843045764d1390f9cb4648980a7569b1619"},
@@ -430,6 +659,18 @@ josepy = [
 mozilla-django-oidc = [
     {file = "mozilla-django-oidc-1.2.3.tar.gz", hash = "sha256:ba6171ebac91f0a9679bfd5fb73d0d41c90f0711f0c06f595f219537a0a6bae0"},
     {file = "mozilla_django_oidc-1.2.3-py2.py3-none-any.whl", hash = "sha256:03e15ea449b66ba3be9f8321a66237fd0cc7b570d4feeb893de58a2d8696b70b"},
+]
+msrest = [
+    {file = "msrest-0.6.17-py2.py3-none-any.whl", hash = "sha256:c51ac6ce2d151b47dd4b3eed0fb8596b6e7c2067eff6bb82e874beaf7bfec531"},
+    {file = "msrest-0.6.17.tar.gz", hash = "sha256:1345f73c178a7b445716590bc1346d44ac47c647ee83be57a48e2027d618f17c"},
+]
+msrestazure = [
+    {file = "msrestazure-0.6.4-py2.py3-none-any.whl", hash = "sha256:3de50f56147ef529b31e099a982496690468ecef33f0544cb0fa0cfe1e1de5b9"},
+    {file = "msrestazure-0.6.4.tar.gz", hash = "sha256:a06f0dabc9a6f5efe3b6add4bd8fb623aeadacf816b7a35b0f89107e0544d189"},
+]
+oauthlib = [
+    {file = "oauthlib-3.1.0-py2.py3-none-any.whl", hash = "sha256:df884cd6cbe20e32633f1db1072e9356f53638e4361bef4e8b03c9127c9328ea"},
+    {file = "oauthlib-3.1.0.tar.gz", hash = "sha256:bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889"},
 ]
 pathspec = [
     {file = "pathspec-0.8.0-py2.py3-none-any.whl", hash = "sha256:7d91249d21749788d07a2d0f94147accd8f845507400749ea19c1ec9054a12b0"},
@@ -458,9 +699,17 @@ pycparser = [
     {file = "pycparser-2.20-py2.py3-none-any.whl", hash = "sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705"},
     {file = "pycparser-2.20.tar.gz", hash = "sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"},
 ]
+pyjwt = [
+    {file = "PyJWT-1.7.1-py2.py3-none-any.whl", hash = "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e"},
+    {file = "PyJWT-1.7.1.tar.gz", hash = "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"},
+]
 pyopenssl = [
     {file = "pyOpenSSL-19.1.0-py2.py3-none-any.whl", hash = "sha256:621880965a720b8ece2f1b2f54ea2071966ab00e2970ad2ce11d596102063504"},
     {file = "pyOpenSSL-19.1.0.tar.gz", hash = "sha256:9a24494b2602aaf402be5c9e30a0b82d4a5c67528fe8fb475e3f3bc00dd69507"},
+]
+python-dateutil = [
+    {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},
+    {file = "python_dateutil-2.8.1-py2.py3-none-any.whl", hash = "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"},
 ]
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
@@ -492,6 +741,11 @@ regex = [
 requests = [
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
     {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
+]
+requests-oauthlib = [
+    {file = "requests-oauthlib-1.3.0.tar.gz", hash = "sha256:b4261601a71fd721a8bd6d7aa1cc1d6a8a93b4a9f5e96626f8e4d91e8beeaa6a"},
+    {file = "requests_oauthlib-1.3.0-py2.py3-none-any.whl", hash = "sha256:7f71572defaecd16372f9006f33c2ec8c077c3cfa6f5911a9a90202beb513f3d"},
+    {file = "requests_oauthlib-1.3.0-py3.7.egg", hash = "sha256:fa6c47b933f01060936d87ae9327fead68768b69c6c9ea2109c48be30f2d4dbc"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},

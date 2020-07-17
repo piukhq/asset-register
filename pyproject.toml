@@ -10,6 +10,12 @@ Django = "^3.0.6"
 mozilla-django-oidc = "^1.2.3"
 django-prometheus = "^2.0.0"
 gunicorn = "^20.0.4"
+azure-mgmt-rdbms = "^2.2.0"
+azure-mgmt-redis = "^6.0.0"
+azure-mgmt-compute = "^13.0.0"
+azure-mgmt-keyvault = "^2.2.0"
+azure-mgmt-network = "^11.0.0"
+azure-mgmt-frontdoor = "^0.3.0"
 
 [tool.poetry.dev-dependencies]
 psycopg2 = "^2.8.5"
