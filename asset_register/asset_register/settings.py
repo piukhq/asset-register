@@ -129,7 +129,7 @@ STATIC_ROOT = "/tmp/static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-AZURE_TENANT = 'a6e2367a-92ea-4e5a-b565-723830bcc095'
+AZURE_TENANT = "a6e2367a-92ea-4e5a-b565-723830bcc095"
 
 # OIDC
 OIDC_RP_CLIENT_ID = "abb34c7c-7836-49c5-bff8-72e5272719c5"
