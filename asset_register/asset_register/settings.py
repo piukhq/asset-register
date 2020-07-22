@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    "aadadmin.apps.AADAdminConfig",
     "django.contrib.auth",
     "mozilla_django_oidc",
     "django.contrib.contenttypes",
