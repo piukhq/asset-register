@@ -10,13 +10,25 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(model_name="asset", name="purchase_date", field=models.DateTimeField(null=True),),
-        migrations.AddField(model_name="asset", name="warrenty_date", field=models.DateTimeField(null=True),),
-        migrations.AlterField(
-            model_name="asset", name="disposal_date", field=models.DateTimeField(blank=True, null=True),
+        migrations.AddField(
+            model_name="asset",
+            name="purchase_date",
+            field=models.DateTimeField(null=True),
+        ),
+        migrations.AddField(
+            model_name="asset",
+            name="warrenty_date",
+            field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name="asset", name="disposal_method", field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset",
+            name="disposal_date",
+            field=models.DateTimeField(blank=True, null=True),
+        ),
+        migrations.AlterField(
+            model_name="asset",
+            name="disposal_method",
+            field=models.CharField(blank=True, max_length=32, null=True),
         ),
         migrations.AlterField(
             model_name="asset",

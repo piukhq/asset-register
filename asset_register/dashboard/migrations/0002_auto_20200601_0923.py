@@ -10,10 +10,20 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(model_name="asset", name="assigned_date", field=models.DateTimeField(null=True),),
-        migrations.AddField(model_name="asset", name="disposal_date", field=models.DateTimeField(null=True),),
         migrations.AddField(
-            model_name="asset", name="disposal_method", field=models.CharField(max_length=32, null=True),
+            model_name="asset",
+            name="assigned_date",
+            field=models.DateTimeField(null=True),
+        ),
+        migrations.AddField(
+            model_name="asset",
+            name="disposal_date",
+            field=models.DateTimeField(null=True),
+        ),
+        migrations.AddField(
+            model_name="asset",
+            name="disposal_method",
+            field=models.CharField(max_length=32, null=True),
         ),
         migrations.AddField(
             model_name="asset",

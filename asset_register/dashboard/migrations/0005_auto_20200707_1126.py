@@ -11,9 +11,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="asset", name="cost", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+            model_name="asset",
+            name="cost",
+            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
         ),
         migrations.AlterField(
-            model_name="asset", name="vat", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+            model_name="asset",
+            name="vat",
+            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
         ),
     ]

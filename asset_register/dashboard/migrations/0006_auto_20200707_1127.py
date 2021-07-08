@@ -11,6 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="asset", name="asset_keeper", field=models.CharField(max_length=128, null=True),
+            model_name="asset",
+            name="asset_keeper",
+            field=models.CharField(max_length=128, null=True),
         ),
     ]

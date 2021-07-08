@@ -1,4 +1,3 @@
-import os
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.redis import RedisManagementClient
 from azure.mgmt.rdbms.postgresql import PostgreSQLManagementClient
