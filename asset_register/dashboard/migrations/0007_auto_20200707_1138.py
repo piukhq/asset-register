@@ -11,12 +11,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="asset", name="disposal_finance_informed", field=models.BooleanField(default=False),
+            model_name="asset",
+            name="disposal_finance_informed",
+            field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name="asset", name="disposal_finance_informed_date", field=models.DateTimeField(null=True),
+            model_name="asset",
+            name="disposal_finance_informed_date",
+            field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name="asset", name="disposal_sold_to", field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset",
+            name="disposal_sold_to",
+            field=models.CharField(blank=True, max_length=32, null=True),
         ),
     ]

@@ -1,7 +1,7 @@
 import time
 import json
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views.generic import View
 from django.utils.decorators import method_decorator
