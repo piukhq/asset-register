@@ -10,7 +10,7 @@ test:style:
     - pipenv install --dev --system --deploy --ignore-pipfile
   script:
     - flake8
-    - poetry run black --line-length 120 --check .
+    - black --line-length 120 --check .
 
 build:master:
   stage: build
