@@ -14,7 +14,7 @@ azure-mgmt-compute = "*"
 azure-mgmt-keyvault = "*"
 azure-mgmt-network = "*"
 azure-mgmt-frontdoor = "*"
-psycopg2-binary = "*"
+psycopg2-binary = "==2.8.6"
 
 [dev-packages]
 black = "==21.6b0"
