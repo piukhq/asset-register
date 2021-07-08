@@ -10,5 +10,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(model_name="asset", old_name="warrenty_date", new_name="warranty_date",),
+        migrations.RenameField(
+            model_name="asset",
+            old_name="warrenty_date",
+            new_name="warranty_date",
+        ),
     ]

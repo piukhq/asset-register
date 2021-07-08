@@ -1,34 +1,50 @@
 stages:
-  - tests
+  - test
   - build
   - deploy
 
-black:
-  stage: tests
-  image: python:3.8
+test:style:
+  stage: test
+  image: ghcr.io/binkhq/python:3.9
+  before_script:
+    - pipenv install --dev --system --deploy --ignore-pipfile
   script:
-    - pip3 install poetry
-    - poetry install
-    - poetry run black -l 120 -t py38 --check .
+    - flake8
+    - poetry run black --line-length 120 --check .
 
-build:
+build:master:
   stage: build
+  needs: ["test:style"]
   image: docker:latest
   services:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - export CTAG=$(echo -n "$CI_PIPELINE_CREATED_AT" | sed s/\://g)
   script:
-    - docker build --build-arg=COMMIT="$CI_COMMIT_SHORT_SHA" --pull -t "$CI_REGISTRY/asset-register:latest" .
-    
-    - docker push "$CI_REGISTRY/asset-register:latest"
+    - docker build --pull --tag "$CI_REGISTRY/$CI_PROJECT_NAME:$CTAG" .
+    - docker push "$CI_REGISTRY/$CI_PROJECT_NAME:$CTAG"
   only:
-    - master
+    - develop
 
-tag:
+deploy:tools:
   stage: deploy
-  image: binkops.azurecr.io/tagbot:latest
+  needs: ["build:master"]
+  image: binkcore.azurecr.io/tagbot:latest
+  environment:
+    name: tools
+  before_script:
+    - export CTAG=$(echo -n "$CI_PIPELINE_CREATED_AT" | sed s/\://g)
   script:
-    - tagbot --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" --source "$CI_REGISTRY/asset-register:latest" --tag "$CI_COMMIT_SHORT_SHA"
+    - tagbot
+      --username "$CI_REGISTRY_USER"
+      --password "$CI_REGISTRY_PASSWORD"
+      --source "$CI_REGISTRY/$CI_PROJECT_NAME:$CTAG"
+      --tag "$CI_ENVIRONMENT_NAME-$CTAG"
+    - tagbot
+      --username "$CI_REGISTRY_USER"
+      --password "$CI_REGISTRY_PASSWORD"
+      --source "$CI_REGISTRY/$CI_PROJECT_NAME:$CTAG"
+      --tag "$CI_ENVIRONMENT_NAME"
   only:
-    - master
+    - develop

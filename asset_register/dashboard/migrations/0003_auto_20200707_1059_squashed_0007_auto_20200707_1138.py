@@ -18,12 +18,20 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(model_name="asset", name="purchase_date", field=models.DateTimeField(null=True),),
-        migrations.AlterField(
-            model_name="asset", name="disposal_date", field=models.DateTimeField(blank=True, null=True),
+        migrations.AddField(
+            model_name="asset",
+            name="purchase_date",
+            field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name="asset", name="disposal_method", field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset",
+            name="disposal_date",
+            field=models.DateTimeField(blank=True, null=True),
+        ),
+        migrations.AlterField(
+            model_name="asset",
+            name="disposal_method",
+            field=models.CharField(blank=True, max_length=32, null=True),
         ),
         migrations.AlterField(
             model_name="asset",
@@ -37,23 +45,39 @@ class Migration(migrations.Migration):
                 choices=[("ACTIVE", "Active"), ("DISPOSED", "Disposed")], default="ACTIVE", max_length=16
             ),
         ),
-        migrations.AddField(model_name="asset", name="warranty_date", field=models.DateTimeField(null=True),),
-        migrations.AlterField(
-            model_name="asset", name="cost", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
-        ),
-        migrations.AlterField(
-            model_name="asset", name="vat", field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+        migrations.AddField(
+            model_name="asset",
+            name="warranty_date",
+            field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name="asset", name="asset_keeper", field=models.CharField(max_length=128, null=True),
+            model_name="asset",
+            name="cost",
+            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+        ),
+        migrations.AlterField(
+            model_name="asset",
+            name="vat",
+            field=models.DecimalField(decimal_places=4, max_digits=12, null=True),
+        ),
+        migrations.AlterField(
+            model_name="asset",
+            name="asset_keeper",
+            field=models.CharField(max_length=128, null=True),
         ),
         migrations.AddField(
-            model_name="asset", name="disposal_finance_informed", field=models.BooleanField(default=False),
+            model_name="asset",
+            name="disposal_finance_informed",
+            field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name="asset", name="disposal_finance_informed_date", field=models.DateTimeField(null=True),
+            model_name="asset",
+            name="disposal_finance_informed_date",
+            field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name="asset", name="disposal_sold_to", field=models.CharField(blank=True, max_length=32, null=True),
+            model_name="asset",
+            name="disposal_sold_to",
+            field=models.CharField(blank=True, max_length=32, null=True),
         ),
     ]
