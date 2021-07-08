@@ -1,17 +1,10 @@
-FROM binkhq/python:3.8
+FROM ghcr.io/binkhq/python:3.9
 ARG COMMIT="GITHASH"
 
 WORKDIR /app
-COPY poetry.lock pyproject.toml /app/
+COPY Pipfile Pipfile.lock /app/
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
-    pip install --no-cache-dir poetry psycopg2-binary && \
-    poetry config virtualenvs.create false --local && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists
-
-RUN poetry install --no-dev --no-root
+RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY asset_register /app/asset_register/
 COPY entrypoint.sh /entrypoint

@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3.0.*"
+mozilla-django-oidc = "*"
+django-prometheus = "*"
+gunicorn = "*"
+azure-mgmt-rdbms = "*"
+azure-mgmt-redis = "*"
+azure-mgmt-compute = "*"
+azure-mgmt-keyvault = "*"
+azure-mgmt-network = "*"
+azure-mgmt-frontdoor = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+black = "==21.6b0"
+flake8 = "*"
+mypy = "*"
+pytest = "*"
+ptpython = "*"
+xenon = "*"
+
+[requires]
+python_version = "3.9"

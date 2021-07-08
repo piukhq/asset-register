@@ -58,11 +58,11 @@ class Asset(models.Model):
         result = []
 
         if filter == "computer":
-            call = lambda: cls.objects.filter(type__exact="LAPTOP", state__exact="ACTIVE")
+            call = lambda: cls.objects.filter(type__exact="LAPTOP", state__exact="ACTIVE")  # noqa E731
         elif filter == "misc":
-            call = lambda: cls.objects.exclude(type__exact="LAPTOP").exclude(state__exact="DISPOSED")
+            call = lambda: cls.objects.exclude(type__exact="LAPTOP").exclude(state__exact="DISPOSED")  # noqa E731
         elif filter == "disposed":
-            call = lambda: cls.objects.filter(state__exact="DISPOSED")
+            call = lambda: cls.objects.filter(state__exact="DISPOSED")  # noqa E731
         else:
             call = cls.objects.all
 
