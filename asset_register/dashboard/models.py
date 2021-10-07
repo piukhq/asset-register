@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.safestring import SafeString
 from typing import Optional
 
+
 class Asset(models.Model):
     STATES = (("ACTIVE", "Active"), ("DISPOSED", "Disposed"))
 
