@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Asset
 from .utils import login_required
-from .azure import get_inventory
 
 
 @login_required()
@@ -22,13 +21,6 @@ def index(request: HttpRequest) -> HttpResponse:
 def misc_asset_view(request: HttpRequest) -> HttpResponse:
     ctx = {"nav": "misc"}
     return render(request, "active_misc_assets.html", ctx)
-
-
-@login_required()
-def azure_asset_view(request: HttpRequest) -> HttpResponse:
-    ctx = {"nav": "azure", "resources": get_inventory()}
-
-    return render(request, "azure_assets.html", ctx)
 
 
 @login_required()

@@ -1,10 +1,8 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from typing import Dict, Any, List
 from django.urls import reverse
 from django.utils.safestring import SafeString
 from typing import Optional
-
 
 class Asset(models.Model):
     STATES = (("ACTIVE", "Active"), ("DISPOSED", "Disposed"))
@@ -16,7 +14,7 @@ class Asset(models.Model):
     description = models.TextField(null=True)
     serial_number = models.CharField(max_length=64, null=True, blank=True)
     manufacturer = models.CharField(max_length=32, null=True, blank=True)
-    metadata = JSONField(null=True, blank=True)
+    metadata = models.JSONField(null=True, blank=True)
     type = models.CharField(choices=ITEM_TYPE, max_length=16, null=False)
 
     state = models.TextField(choices=STATES, null=False, default="ACTIVE", max_length=16)

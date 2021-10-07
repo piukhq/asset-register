@@ -92,7 +92,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "asset_register",
         "USER": os.getenv("DB_USER", "postgres"),
-        # "PASSWORD": "postgres",
+        "PASSWORD": os.getenv("DB_PASS", None),
         "HOST": os.getenv("DB_HOST", "localhost"),
         "PORT": "5432",
     }

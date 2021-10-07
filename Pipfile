@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==3.0.*"
+django = "*"
 mozilla-django-oidc = "*"
 django-prometheus = "*"
 gunicorn = "*"
@@ -14,7 +14,7 @@ azure-mgmt-compute = "*"
 azure-mgmt-keyvault = "*"
 azure-mgmt-network = "*"
 azure-mgmt-frontdoor = "*"
-psycopg2-binary = "==2.8.6"
+psycopg2-binary = "*"
 msrestazure = "*"
 
 [dev-packages]
