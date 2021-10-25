@@ -8,7 +8,7 @@ from typing import Optional
 class Asset(models.Model):
     STATES = (("ACTIVE", "Active"), ("DISPOSED", "Disposed"))
 
-    ITEM_TYPE = (("MONITOR", "Monitor"), ("TV", "TV"), ("LAPTOP", "Laptop"), ("PHONE", "Phone"), ("OTHER", "Other"))
+    ITEM_TYPE = (("MONITOR", "Monitor"), ("TV", "TV"), ("LAPTOP", "Laptop"), ("PHONE", "Phone"), ("FOB", "Fob"), ("OTHER", "Other"))
 
     id = models.CharField(max_length=10, primary_key=True)
 
@@ -60,6 +60,8 @@ class Asset(models.Model):
             call = lambda: cls.objects.filter(type__exact="LAPTOP", state__exact="ACTIVE")  # noqa E731
         elif filter == "misc":
             call = lambda: cls.objects.exclude(type__exact="LAPTOP").exclude(state__exact="DISPOSED")  # noqa E731
+        elif filter == "fob":
+            call = lambda: cls.objects.exclude(type__exact="FOB").exclude(state__exact="DISPOSED")  # noqa E731
         elif filter == "disposed":
             call = lambda: cls.objects.filter(state__exact="DISPOSED")  # noqa E731
         else:

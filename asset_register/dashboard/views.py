@@ -22,6 +22,11 @@ def misc_asset_view(request: HttpRequest) -> HttpResponse:
     ctx = {"nav": "misc"}
     return render(request, "active_misc_assets.html", ctx)
 
+@login_required()
+def fobs_asset_view(request: HttpRequest) -> HttpResponse:
+    ctx = {"nav": "fobs"}
+    return render(request, "active_fobs_assets.html", ctx)
+
 
 @login_required()
 def disposed_asset_view(request: HttpRequest) -> HttpResponse:
