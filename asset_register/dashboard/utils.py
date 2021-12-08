@@ -1,7 +1,7 @@
 import functools
 
-from django.urls import reverse
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 
 
 def login_required(api: bool = False):

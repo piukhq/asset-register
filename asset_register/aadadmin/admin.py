@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
 

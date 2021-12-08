@@ -1,11 +1,12 @@
-import time
 import json
-from django.shortcuts import render, get_object_or_404
+import time
+
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
 
 from .models import Asset
 from .utils import login_required

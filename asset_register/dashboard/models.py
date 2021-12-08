@@ -1,8 +1,8 @@
+from typing import Any, Dict, List, Optional
+
 from django.db import models
-from typing import Dict, Any, List
 from django.urls import reverse
 from django.utils.safestring import SafeString
-from typing import Optional
 
 
 class Asset(models.Model):

@@ -1,12 +1,12 @@
 import os
-from azure.mgmt.compute import ComputeManagementClient
-from azure.mgmt.redis import RedisManagementClient
-from azure.mgmt.rdbms.postgresql import PostgreSQLManagementClient
-from azure.mgmt.keyvault import KeyVaultManagementClient
-from azure.mgmt.frontdoor import FrontDoorManagementClient
-from azure.mgmt.network import NetworkManagementClient
-from azure.common.credentials import ServicePrincipalCredentials
 
+from azure.common.credentials import ServicePrincipalCredentials
+from azure.mgmt.compute import ComputeManagementClient
+from azure.mgmt.frontdoor import FrontDoorManagementClient
+from azure.mgmt.keyvault import KeyVaultManagementClient
+from azure.mgmt.network import NetworkManagementClient
+from azure.mgmt.rdbms.postgresql import PostgreSQLManagementClient
+from azure.mgmt.redis import RedisManagementClient
 
 creds = ServicePrincipalCredentials(
     client_id=os.environ["AZURE_CLIENT_ID"],
