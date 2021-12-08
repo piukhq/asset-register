@@ -9,6 +9,7 @@ mozilla-django-oidc = "*"
 django-prometheus = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+dj-database-url = "*"
 
 [dev-packages]
 black = "==21.11b1"
