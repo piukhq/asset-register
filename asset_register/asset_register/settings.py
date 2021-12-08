@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
+
+from environment import env_var, read_env
 
 VERSION = "__VERSION__"
 
