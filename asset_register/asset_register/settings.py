@@ -87,6 +87,15 @@ WSGI_APPLICATION = "asset_register.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+if env_var("TOOLS_DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            env="TOOLS_DATABASE_URL",
+            conn_max_age=600,
+            engine="tools.traced_db_wrapper",
+        )
+    }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
