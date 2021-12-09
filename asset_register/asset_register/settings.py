@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 import dj_database_url
-from environment import env_var
+from os import getenv
 
 VERSION = "__VERSION__"
 
@@ -90,7 +90,7 @@ WSGI_APPLICATION = "asset_register.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if env_var("TOOLS_DATABASE_URL"):
+if getenv("TOOLS_DATABASE_URL"):
     DATABASES = {
         "default": dj_database_url.config(
             env="TOOLS_DATABASE_URL",
