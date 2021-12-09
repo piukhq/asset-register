@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-import dj_database_url
+import dj-database-url
 from environment import env_var
 
 VERSION = "__VERSION__"
