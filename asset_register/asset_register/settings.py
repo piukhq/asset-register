@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 import dj_database_url
-from os import getenv
 
 VERSION = "__VERSION__"
 
@@ -90,24 +89,11 @@ WSGI_APPLICATION = "asset_register.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if getenv("TOOLS_DATABASE_URL"):
-    DATABASES = {
-        "default": dj_database_url.config(
-            env="TOOLS_DATABASE_URL",
-            conn_max_age=600,
-            engine="tools.traced_db_wrapper",
-        )
-    }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "asset_register",
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASS", None),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": "5432",
-    }
+    "default": dj_database_url.config(
+        env="DATABASE_URL",
+        conn_max_age=600,
+    )
 }
 
 
