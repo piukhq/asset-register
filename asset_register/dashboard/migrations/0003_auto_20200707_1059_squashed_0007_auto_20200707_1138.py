@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("dashboard", "0003_auto_20200707_1059"),
         ("dashboard", "0004_auto_20200707_1110"),

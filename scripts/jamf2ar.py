@@ -3,7 +3,7 @@ import os
 import requests
 
 # asset_register_url = 'http://localhost:8000'
-asset_register_url = "https://asset-register.tools.bink.sh"
+asset_register_url = "https://asset-register.gb.bink.com"
 
 jamf_auth = (os.getenv("JAMF_USER"), os.getenv("JAMF_PASSWORD"))
 

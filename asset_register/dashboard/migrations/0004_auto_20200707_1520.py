@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dashboard", "0003_auto_20200707_1059_squashed_0007_auto_20200707_1138"),
     ]

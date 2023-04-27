@@ -9,22 +9,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 
 from .models import Asset
-from .utils import login_required
 
 
-@login_required()
 def index(request: HttpRequest) -> HttpResponse:
     ctx = {"nav": "computer"}
     return render(request, "active_computer_assets.html", ctx)
 
 
-@login_required()
 def misc_asset_view(request: HttpRequest) -> HttpResponse:
     ctx = {"nav": "misc"}
     return render(request, "active_misc_assets.html", ctx)
 
 
-@login_required()
 def disposed_asset_view(request: HttpRequest) -> HttpResponse:
     ctx = {"nav": "disposed"}
     return render(request, "disposed_assets.html", ctx)
@@ -36,13 +32,11 @@ def test_delay(request: HttpRequest) -> HttpResponse:
     return JsonResponse({"status": "ok"})
 
 
-@login_required()
 def add_asset_view(request: HttpRequest) -> HttpResponse:
     ctx = {"types": Asset.ITEM_TYPE}
     return render(request, "add_asset.html", ctx)
 
 
-@login_required()
 def asset_view(request: HttpRequest, asset_id: str) -> HttpResponse:
     obj = get_object_or_404(Asset, id=asset_id)
 
@@ -51,7 +45,6 @@ def asset_view(request: HttpRequest, asset_id: str) -> HttpResponse:
 
 
 # /api/asset  TODO should use DRF
-@method_decorator(login_required(api=True), name="dispatch")
 @method_decorator(csrf_exempt, name="dispatch")
 class ApiAssetView(View):
     def get(self, request: HttpRequest) -> HttpResponse:

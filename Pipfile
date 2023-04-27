@@ -4,15 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "<4.0"
-mozilla-django-oidc = "*"
-django-prometheus = "*"
+django = "*"
+django-azure-active-directory-signin = "*"
+tzdata = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
 
 [dev-packages]
-black = "==21.11b1"
+black = "*"
 flake8 = "*"
 mypy = "*"
 pytest = "*"
@@ -21,4 +21,4 @@ xenon = "*"
 isort = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"

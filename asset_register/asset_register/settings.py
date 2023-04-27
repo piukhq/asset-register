@@ -40,17 +40,15 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 INSTALLED_APPS = [
     "aadadmin.apps.AADAdminConfig",
     "django.contrib.auth",
-    "mozilla_django_oidc",
+    "azure_signin",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_prometheus",
     "dashboard",
 ]
 
 MIDDLEWARE = [
-    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -58,11 +56,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "mozilla_django_oidc.middleware.SessionRefresh",
-    "django_prometheus.middleware.PrometheusAfterMiddleware",
+    "azure_signin.middleware.AzureSigninMiddleware",
 ]
 
-AUTHENTICATION_BACKENDS = ("dashboard.auth.MyOIDCAuthBackend",)
+AUTHENTICATION_BACKENDS = ["azure_signin.backends.AzureSigninBackend"]
 
 ROOT_URLCONF = "asset_register.urls"
 
@@ -138,18 +135,13 @@ STATIC_ROOT = "/tmp/static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-AZURE_TENANT = "a6e2367a-92ea-4e5a-b565-723830bcc095"
+AZURE_SIGNIN = {
+    "CLIENT_ID": "abb34c7c-7836-49c5-bff8-72e5272719c5",
+    "CLIENT_SECRET": "43S.Su-0JpiZ3oc.hJDC9Jyo~dzBO~u3h2",
+    "TENANT_ID": "a6e2367a-92ea-4e5a-b565-723830bcc095",
+    "REDIRECT_URI": "https://asset-register.gb.bink.com/azure-signin/callback",
+}
 
-# OIDC
-OIDC_RP_CLIENT_ID = "abb34c7c-7836-49c5-bff8-72e5272719c5"
-OIDC_RP_CLIENT_SECRET = "43S.Su-0JpiZ3oc.hJDC9Jyo~dzBO~u3h2"
-OIDC_RP_SIGN_ALGO = "RS256"
-OIDC_OP_JWKS_ENDPOINT = "https://login.microsoftonline.com/a6e2367a-92ea-4e5a-b565-723830bcc095/discovery/v2.0/keys"
-OIDC_OP_AUTHORIZATION_ENDPOINT = (
-    "https://login.microsoftonline.com/a6e2367a-92ea-4e5a-b565-723830bcc095/oauth2/v2.0/authorize"
-)
-OIDC_OP_TOKEN_ENDPOINT = "https://login.microsoftonline.com/a6e2367a-92ea-4e5a-b565-723830bcc095/oauth2/v2.0/token"
-OIDC_OP_USER_ENDPOINT = "https://graph.microsoft.com/oidc/userinfo"
-OIDC_RENEW_ID_TOKEN_EXPIRY_SECONDS = 60 * 30
-
+LOGIN_URL = "azure_signin:login"
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL

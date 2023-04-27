@@ -3,7 +3,7 @@ import datetime
 import requests
 
 # asset_register_url = "http://localhost:8000"
-asset_register_url = "https://asset-register.tools.bink.sh"
+asset_register_url = "https://asset-register.gb.bink.com"
 
 
 def parse_date(value: str) -> str:
